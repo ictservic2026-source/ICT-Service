@@ -1,0 +1,38 @@
+html.auth-pending body { visibility: hidden; }
+
+.auth-user-menu {
+  position: fixed;
+  top: 10px;
+  right: 16px;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px 6px 11px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 999px;
+  background: rgba(15,23,42,.94);
+  color: #fff;
+  box-shadow: 0 4px 18px rgba(15,23,42,.24);
+  font: 600 12px/1.2 Sarabun, Inter, sans-serif;
+}
+
+.auth-user-menu__role { color: #BAE6FD; font-size: 10px; letter-spacing: .05em; text-decoration: none; cursor: pointer; }
+.auth-user-menu__role:hover { text-decoration: underline; }
+.auth-user-menu__link { color: #E0F2FE; font: inherit; text-decoration: none; }
+.auth-user-menu__link:hover { text-decoration: underline; }
+.auth-user-menu__logout {
+  border: 0;
+  border-radius: 999px;
+  padding: 5px 9px;
+  color: #fff;
+  background: rgba(255,255,255,.16);
+  font: inherit;
+  cursor: pointer;
+}
+.auth-user-menu__logout:hover { background: rgba(255,255,255,.28); }
+
+@media (max-width: 680px) {
+  .auth-user-menu { top: 6px; right: 7px; }
+  .auth-user-menu__name, .auth-user-menu__link { display: none; }
+}

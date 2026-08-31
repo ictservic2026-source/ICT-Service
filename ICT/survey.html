@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>ประเมินความพึงพอใจ — ICT Service Desk</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/survey.css">
+</head>
+<body>
+<div class="card">
+  <!-- HEADER -->
+  <div class="hd">
+    <div class="hd-top">
+      <div class="logo">NISSEI</div>
+      <div class="doc-badge">FM-IC-001 Rev.9</div>
+    </div>
+    <div class="hd-title">ประเมินความพึงพอใจการใช้บริการ</div>
+    <div class="hd-sub">ICT Service Desk — NISSEI TRADING (THAILAND)</div>
+
+    <!-- TICKET INFO -->
+    <div class="ticket-card" id="ticketCard" style="display:none;">
+      <div class="ticket-card-row">
+        <span class="tc-key">เลขที่งาน</span>
+        <span class="tc-val tk" id="tc-no">—</span>
+      </div>
+      <div class="ticket-card-row">
+        <span class="tc-key">ผู้แจ้ง</span>
+        <span class="tc-val" id="tc-requester">—</span>
+      </div>
+      <div class="ticket-card-row">
+        <span class="tc-key">แผนก</span>
+        <span class="tc-val" id="tc-dept">—</span>
+      </div>
+      <div class="ticket-card-row">
+        <span class="tc-key">ปัญหา</span>
+        <span class="tc-val" id="tc-issue">—</span>
+      </div>
+      <div class="ticket-card-row" id="tc-action-row" style="display:none;">
+        <span class="tc-key">การแก้ไข</span>
+        <span class="tc-val" id="tc-action">—</span>
+      </div>
+      <div class="ticket-card-row" id="tc-staff-row" style="display:none;">
+        <span class="tc-key">เจ้าหน้าที่</span>
+        <span class="tc-val" id="tc-staff">—</span>
+      </div>
+    </div>
+
+    <div id="ticketLoading" style="color:rgba(255,255,255,.6);font-size:12px;margin-top:10px;text-align:center;">กำลังโหลดข้อมูลงาน...</div>
+  </div>
+
+  <div class="body">
+    <div class="already-banner" id="alreadyBanner">✅ คุณได้ส่งแบบประเมินนี้แล้ว ขอบคุณ!</div>
+    <div class="err-toast" id="errToast"></div>
+
+    <!-- FORM -->
+    <div id="formSection">
+      <!-- CHECKBOX -->
+      <div class="chk-wrap">
+        <div class="chk-hd">โปรดทำเครื่องหมาย ✓ ที่ตรงกับความเป็นจริง</div>
+        <div class="chk-row" onclick="toggleChk('c1')">
+          <div class="chk-box" id="c1"><span class="chk-tick">✓</span></div>
+          <div class="chk-text"><b>จนท. ได้ดำเนินการแก้ไขเป็นที่เรียบร้อยสมบูรณ์</b> สามารถใช้งานได้ตามปกติ อย่างมีประสิทธิภาพ</div>
+        </div>
+        <div class="chk-row" onclick="toggleChk('c2')">
+          <div class="chk-box" id="c2"><span class="chk-tick">✓</span></div>
+          <div class="chk-text"><b>จนท. ได้อธิบายเกี่ยวกับปัญหา, สาเหตุ, การแก้ไขและการป้องกัน</b> ให้ผู้ขอใช้บริการได้รับทราบโดยสังเขปแล้ว</div>
+        </div>
+      </div>
+
+      <!-- SCORE ITEMS -->
+      <div class="sec-title">หัวข้อประเมินความพึงพอใจ</div>
+
+      <!-- Q1: 0-30 -->
+      <div class="score-item" id="si-1">
+        <div class="score-hd">
+          <div class="score-label">1. แก้ไขปัญหาหรือบริการตรงตามรายการ</div>
+          <div class="score-badge"><span class="score-cur" id="cur-1">0</span><span class="score-max">/30</span></div>
+        </div>
+        <div class="score-track-wrap" id="trk-1" data-item="1" data-max="30"></div>
+        <div class="score-hint-row"><span class="score-hint" id="hint-1" style="color:var(--mute);">แตะหรือลากเพื่อให้คะแนน</span><span class="score-emoji" id="emo-1"></span></div>
+      </div>
+
+      <!-- Q2: 0-30 -->
+      <div class="score-item" id="si-2">
+        <div class="score-hd">
+          <div class="score-label">2. ดำเนินการได้ตรงตามเวลาที่ระบุ</div>
+          <div class="score-badge"><span class="score-cur" id="cur-2">0</span><span class="score-max">/30</span></div>
+        </div>
+        <div class="score-track-wrap" id="trk-2" data-item="2" data-max="30"></div>
+        <div class="score-hint-row"><span class="score-hint" id="hint-2" style="color:var(--mute);">แตะหรือลากเพื่อให้คะแนน</span><span class="score-emoji" id="emo-2"></span></div>
+      </div>
+
+      <!-- Q3: 0-20 -->
+      <div class="score-item" id="si-3">
+        <div class="score-hd">
+          <div class="score-label">3. การแนะนำอธิบายของ จนท.</div>
+          <div class="score-badge"><span class="score-cur" id="cur-3">0</span><span class="score-max">/20</span></div>
+        </div>
+        <div class="score-track-wrap" id="trk-3" data-item="3" data-max="20"></div>
+        <div class="score-hint-row"><span class="score-hint" id="hint-3" style="color:var(--mute);">แตะหรือลากเพื่อให้คะแนน</span><span class="score-emoji" id="emo-3"></span></div>
+      </div>
+
+      <!-- Q4: 0-10 -->
+      <div class="score-item" id="si-4">
+        <div class="score-hd">
+          <div class="score-label">4. ความสุภาพเรียบร้อยในการบริการ</div>
+          <div class="score-badge"><span class="score-cur" id="cur-4">0</span><span class="score-max">/10</span></div>
+        </div>
+        <div class="score-track-wrap" id="trk-4" data-item="4" data-max="10"></div>
+        <div class="score-hint-row"><span class="score-hint" id="hint-4" style="color:var(--mute);">แตะหรือลากเพื่อให้คะแนน</span><span class="score-emoji" id="emo-4"></span></div>
+      </div>
+
+      <!-- Q5: 0-10 -->
+      <div class="score-item" id="si-5">
+        <div class="score-hd">
+          <div class="score-label">5. ความพึงพอใจโดยรวมของผู้ขอใช้บริการ</div>
+          <div class="score-badge"><span class="score-cur" id="cur-5">0</span><span class="score-max">/10</span></div>
+        </div>
+        <div class="score-track-wrap" id="trk-5" data-item="5" data-max="10"></div>
+        <div class="score-hint-row"><span class="score-hint" id="hint-5" style="color:var(--mute);">แตะหรือลากเพื่อให้คะแนน</span><span class="score-emoji" id="emo-5"></span></div>
+      </div>
+
+      <!-- TOTAL -->
+      <div class="total-box">
+        <div class="total-left">
+          <div class="tl-label">คะแนนรวมทั้งหมด</div>
+          <div class="tl-grade" id="grade-text">—</div>
+          <div class="total-bar-bg" style="width:160px;">
+            <div class="total-bar-fill" id="total-bar" style="width:0%;"></div>
+          </div>
+        </div>
+        <div class="total-num-wrap">
+          <div class="total-num" id="total-num">0</div>
+          <div class="total-num-sub">/ 100 คะแนน</div>
+        </div>
+      </div>
+
+      <!-- COMMENT -->
+      <div class="sec-title">ข้อเสนอแนะ</div>
+      <textarea class="comment-field" id="sv-comment" placeholder="พิมพ์ข้อเสนอแนะ หรือความคิดเห็นเพิ่มเติม..." rows="3"></textarea>
+
+      <!-- SIGNER SECTION -->
+      <div class="sec-title">ลงชื่อผู้ประเมิน <span style="color:var(--red);font-size:11px;font-weight:700;letter-spacing:0;text-transform:none;">* จำเป็น</span></div>
+
+      <!-- TAB SELECTOR -->
+      <div class="sign-tabs">
+        <button class="sign-tab active" id="tab-type" onclick="switchSignTab('type')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+          พิมพ์ชื่อ
+        </button>
+        <button class="sign-tab" id="tab-draw" onclick="switchSignTab('draw')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          เซ็นชื่อ
+        </button>
+      </div>
+
+      <!-- TYPE NAME -->
+      <div id="pane-type" class="sign-pane active">
+        <input class="name-field req" type="text" id="sv-name-typed" placeholder="พิมพ์ชื่อ-นามสกุลผู้ประเมิน">
+        <div class="field-hint">กรอกชื่อ-นามสกุลจริงเพื่อยืนยันการประเมิน</div>
+      </div>
+
+      <!-- DRAW SIGNATURE -->
+      <div id="pane-draw" class="sign-pane" style="display:none;">
+        <div class="canvas-wrap">
+          <canvas id="sigCanvas" width="520" height="130"></canvas>
+          <div class="canvas-placeholder" id="canvasPlaceholder">เซ็นชื่อในกล่องนี้</div>
+        </div>
+        <div class="canvas-actions">
+          <button class="btn-clear" onclick="clearCanvas()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            ล้างลายเซ็น
+          </button>
+          <span class="canvas-hint" id="canvasHint" style="color:var(--mute);">ยังไม่ได้เซ็น</span>
+        </div>
+      </div>
+
+      <button class="btn-submit" id="btnSubmit" onclick="submitSurvey()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        ส่งแบบประเมิน
+      </button>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="success-wrap" id="successWrap">
+      <div class="success-icon">🎉</div>
+      <div class="success-title">ขอบคุณสำหรับการประเมิน!</div>
+      <div class="success-sub">ความเห็นของคุณมีคุณค่าอย่างมาก<br>และจะช่วยให้เราพัฒนาการบริการได้ดียิ่งขึ้น</div>
+      <div class="success-score-box">
+        <div style="font-size:12px;color:var(--g);font-weight:700;margin-bottom:4px;">คะแนนรวม</div>
+        <div class="success-num" id="suc-total">—</div>
+        <div class="success-grade" id="suc-grade">—</div>
+        <div class="success-breakdown" id="suc-breakdown"></div>
+      </div>
+      <div class="close-note">สามารถปิดหน้านี้ได้เลย</div>
+    </div>
+  </div>
+</div>
+
+<script src="js/survey.js"></script>
+</body>
+</html>

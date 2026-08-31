@@ -1,0 +1,137 @@
+:root {
+  --navy:#0F2A44;
+  --blue:#2563EB;
+  --line:#D7E0EA;
+  --muted:#64748B;
+  --bg:#F4F7FB;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:24px;
+  background:linear-gradient(
+    135deg,
+    #EAF2FB,
+    #F8FAFC 55%,
+    #E7F4F5
+  );
+  color:#172033;
+  font-family:Sarabun,Inter,sans-serif;
+}
+
+.login-card {
+  width:min(100%,420px);
+  padding:34px;
+  border:1px solid rgba(203,213,225,.8);
+  border-radius:20px;
+  background:#fff;
+  box-shadow:0 22px 54px rgba(15,42,68,.14);
+}
+
+.login-mark {
+  width:48px;
+  height:48px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  margin-bottom:18px;
+  background:var(--navy);
+  color:#fff;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+
+h1 {
+  margin:0;
+  font-size:25px;
+  line-height:1.25;
+}
+
+.login-sub {
+  margin:7px 0 26px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+label {
+  display:block;
+  margin:16px 0 6px;
+  color:#334155;
+  font-size:13px;
+  font-weight:700;
+}
+
+input {
+  width:100%;
+  height:45px;
+  padding:0 13px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  outline:0;
+  color:#172033;
+  font:inherit;
+}
+
+input:focus {
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px rgba(37,99,235,.12);
+}
+
+.login-btn {
+  width:100%;
+  height:46px;
+  margin-top:24px;
+  border:0;
+  border-radius:9px;
+  color:#fff;
+  background:var(--blue);
+  font:700 15px Sarabun,Inter,sans-serif;
+  cursor:pointer;
+}
+
+.login-btn:hover {
+  background:#1D4ED8;
+}
+
+.login-btn:disabled {
+  opacity:.65;
+  cursor:wait;
+}
+
+.login-error {
+  min-height:20px;
+  margin:13px 0 0;
+  color:#B91C1C;
+  font-size:13px;
+}
+
+.forgot-link-wrap {
+  margin-top:14px;
+  text-align:center;
+}
+
+.forgot-link-wrap a {
+  color:var(--blue);
+  font-size:14px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.forgot-link-wrap a:hover {
+  text-decoration:underline;
+}
+
+.login-note {
+  margin:22px 0 0;
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.55;
+  text-align:center;
+}
