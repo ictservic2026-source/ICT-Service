@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>เข้าสู่ระบบ | ICT Service Desk</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+  <main class="login-card">
+
+    <div class="login-mark">ICT</div>
+
+    <h1>เข้าสู่ระบบเจ้าหน้าที่ IT</h1>
+
+    <p class="login-sub">
+      ICT Service Desk · NISSEI TRADING (THAILAND)
+    </p>
+
+    <form id="loginForm">
+
+      <label for="email">อีเมล</label>
+
+      <input
+        id="email"
+        type="email"
+        autocomplete="email"
+        required
+      >
+
+      <label for="password">รหัสผ่าน</label>
+
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        required
+      >
+
+      <button
+        class="login-btn"
+        id="loginButton"
+        type="submit"
+      >
+        เข้าสู่ระบบ
+      </button>
+
+      <div
+        class="login-error"
+        id="loginMessage"
+        role="alert"
+      ></div>
+
+    </form>
+
+    <div class="forgot-link-wrap">
+      <a href="forgot-password.html">
+        ลืมรหัสผ่าน?
+      </a>
+    </div>
+
+    <p class="login-note">
+      ระบบจะจดจำการเข้าสู่ระบบบน Browser นี้
+      จนกว่าจะกดออกจากระบบ
+    </p>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="js/auth.js"></script>
+
+  <script src="js/login.js"></script>
+
+</body>
+</html>
