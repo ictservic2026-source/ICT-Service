@@ -47,7 +47,7 @@
        * Supabase จะส่ง User กลับมาหน้านี้
        */
       const redirectTo =
-        `${window.location.origin}/reset-password.html`;
+        'https://ictservic2026-source.github.io/ICT-Service/reset-password.html';
 
       const { error } =
         await client.auth.resetPasswordForEmail(
